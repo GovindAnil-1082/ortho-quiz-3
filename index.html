@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEET PG Ortho High-Yield Quiz</title>
+    <style>
+        /* Color Palette */
+        :root {
+            --bg-off-white: #F3EFE3;
+            --primary-green: #769382;
+            --soft-gray: #C0C3B9;
+            --accent-tan: #D5CBB9;
+            --text-dark: #2C3E35;
+            --correct-green: #4CAF50;
+            --wrong-red: #E53935;
+        }
+
+        body {
+            font-family: 'Neue Haas Grotesk Display Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--soft-gray);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Mobile Card Container UI */
+        .phone-frame {
+            width: 100%;
+            max-width: 390px;
+            height: 100vh;
+            max-height: 844px;
+            background-color: var(--bg-off-white);
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            border: 8px solid #2C3E35;
+        }
+
+        /* Top Header with 3D G Logo */
+        .app-header {
+            padding: 20px 20px 10px 20px;
+            text-align: center;
+            background-color: var(--bg-off-white);
+            border-bottom: 1px solid var(--accent-tan);
+        }
+
+        .logo-container {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 8px auto;
+        }
+
+        .app-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        /* Sticky Question Bar */
+        .question-bar {
+            background-color: var(--accent-tan);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--soft-gray);
+        }
+
+        .question-heading {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .timer-badge {
+            background-color: var(--wrong-red);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* Scrollable Content Area */
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .vignette-text {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        /* Options List */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 14px 16px;
+            background-color: white;
+            border: 2px solid var(--soft-gray);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary-green);
+        }
+
+        /* Feedback States */
+        .option-btn.correct {
+            background-color: var(--correct-green) !important;
+            color: white !important;
+            border-color: #388E3C !important;
+        }
+
+        .option-btn.wrong {
+            background-color: var(--wrong-red) !important;
+            color: white !important;
+            border-color: #C62828 !important;
+        }
+
+        .option-btn.disabled {
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        /* Explanation Box */
+        .explanation-card {
+            display: none;
+            margin-top: 20px;
+            background-color: white;
+            border-left: 4px solid var(--primary-green);
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-dark);
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .explanation-card.show {
+            display: block;
+        }
+
+        /* Footer Controls */
+        .footer-controls {
+            padding: 15px 20px;
+            background-color: var(--bg-off-white);
+            border-top: 1px solid var(--accent-tan);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .action-btn {
+            display: none;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .action-btn.show {
+            display: block;
+        }
+
+        /* Results Screen */
+        .results-card {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .results-card.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="phone-frame">
+        <!-- Header with 3D G Logo -->
+        <div class="app-header">
+            <div class="logo-container">
+                <svg viewBox="0 0 100 100" width="100%" height="100%">
+                    <!-- 3D G Logo Vector Representation -->
+                    <path d="M20 30 L40 10 L50 20 L30 40 Z" fill="#4A5568"/>
+                    <rect x="25" y="25" width="15" height="15" fill="#2C3E35" stroke="#FFFFFF" stroke-width="2"/>
+                    <path d="M35 45 L75 45 L75 75 L35 75 L35 55 L55 55 L55 65 L65 65 L65 55 L45 55 Z" fill="#4A5568" stroke="#FFFFFF" stroke-width="2"/>
+                    <!-- 3D extrusion depth elements -->
+                    <polygon points="75,45 85,35 85,65 75,75" fill="#1A365D"/>
+                    <polygon points="35,75 45,85 85,85 75,75" fill="#1A365D"/>
+                </svg>
+            </div>
+            <h1 class="app-title">NEETworld Ortho</h1>
+        </div>
+
+        <!-- Sticky Question Bar -->
+        <div class="question-bar">
+            <h2 id="q-title" class="question-heading">Q1. Median Nerve</h2>
+            <div class="timer-badge"><span id="timer">60</span>s</div>
+        </div>
+
+        <!-- Scrollable Content Area -->
+        <div class="content-area">
+            <div id="quiz-body">
+                <p id="q-vignette" class="vignette-text">A patient with a recent supracondylar humerus fracture is found to have difficulty with thumb abduction and a distinct 'ape hand' deformity. Which nerve is most likely involved?</p>
+                
+                <div id="options-box" class="options-container">
+                    <!-- Dynamic Options Inserted Here -->
+                </div>
+
+                <div id="explanation" class="explanation-card">
+                    <!-- Explanation inserted here -->
+                </div>
+            </div>
+
+            <div id="results-screen" class="results-card">
+                <h2>Quiz Complete! 🎉</h2>
+                <p>You scored <span id="final-score">0</span> / 5</p>
+                <p id="performance-note" style="font-weight: 600; margin-top: 15px;"></p>
+                <button class="action-btn show" style="margin: 20px auto 0 auto;" onclick="restartQuiz()">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Footer Button -->
+        <div class="footer-controls">
+            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                title: "Q1. Median Nerve",
+                vignette: "A patient with a recent supracondylar humerus fracture is found to have difficulty with thumb abduction and a distinct 'ape hand' deformity. Which nerve is most likely involved?",
+                options: ["A) Ulnar Nerve", "B) Radial Nerve", "C) Posterior Interosseous Nerve", "D) Median Nerve"],
+                correct: 3,
+                explanation: "<strong>Correct: Median Nerve (D).</strong> Proximal median nerve injury causes ape hand deformity from loss of thenar muscle function. PIN and Radial nerves cause wrist drop; Ulnar nerve causes claw hand."
+            },
+            {
+                title: "Q2. Ulnar Nerve",
+                vignette: "A patient presents with a classic 'claw hand' deformity after an injury to the wrist. Which muscle group is primarily affected?",
+                options: ["A) Thenar muscles", "B) First and second lumbricals", "C) Third and fourth lumbricals", "D) Adductor pollicis"],
+                correct: 2,
+                explanation: "<strong>Correct: Third and fourth lumbricals (C).</strong> Distal ulnar nerve injury at the wrist results in clawing of the ring and little fingers due to paralysis of the ulnar-innervated lumbricals and interossei."
+            },
+            {
+                title: "Q3. PIN Palsy",
+                vignette: "A patient has difficulty extending their wrist at the MCP joints, exhibiting a complete wrist drop with *no* sensory loss. Which nerve compression syndrome is most likely?",
+                options: ["A) Median nerve at Carpal Tunnel", "B) Radial nerve at Spiral Groove", "C) Ulnar nerve at Cubital Tunnel", "D) Posterior Interosseous Nerve (PIN) in Radial Tunnel"],
+                correct: 3,
+                explanation: "<strong>Correct: PIN in Radial Tunnel (D).</strong> PIN is the pure motor branch of the radial nerve. Injury here gives wrist drop *without* sensory deficits, unlike proximal spiral groove lesions."
+            },
+            {
+                title: "Q4. Osteosarcoma",
+                vignette: "A 16-year-old male presents with dull aching pain in the distal femur. X-ray shows a blastic lesion with classic Codman’s triangle and a sunburst periosteal reaction. Most likely diagnosis?",
+                options: ["A) Osteoclastoma", "B) Osteosarcoma", "C) Ewing Sarcoma", "D) Osteoid Osteoma"],
+                correct: 1,
+                explanation: "<strong>Correct: Osteosarcoma (B).</strong> Codman’s triangle (elevated periosteum) and sunburst spicules of new bone formation in the metaphyseal region of long bones in adolescents are pathognomonic."
+            },
+            {
+                title: "Q5. Osteoclastoma",
+                vignette: "A 30-year-old female presents with progressive knee pain. X-ray of the distal femur reveals a large, eccentric, purely lytic 'soap bubble' lesion extending to the epiphysis. Most likely diagnosis?",
+                options: ["A) Osteosarcoma", "B) Osteoblastoma", "C) Giant Cell Tumor (Osteoclastoma)", "D) Chondrosarcoma"],
+                correct: 2,
+                explanation: "<strong>Correct: Giant Cell Tumor / Osteoclastoma (C).</strong> The classic 'soap bubble' appearance extending right up to the subchondral bone of the epiphysis in young adults is diagnostic for GCT."
+            }
+        ];
+
+        let currentIndex = 0;
+        let score = 0;
+        let timer;
+        let timeLeft = 60;
+
+        const qTitle = document.getElementById('q-title');
+        const qVignette = document.getElementById('q-vignette');
+        const optionsBox = document.getElementById('options-box');
+        const explanationBox = document.getElementById('explanation');
+        const nextBtn = document.getElementById('next-btn');
+        const timerSpan = document.getElementById('timer');
+        const quizBody = document.getElementById('quiz-body');
+        const resultsScreen = document.getElementById('results-screen');
+        const finalScore = document.getElementById('final-score');
+        const performanceNote = document.getElementById('performance-note');
+
+        function loadQuestion() {
+            if (currentIndex >= questions.length) {
+                showResults();
+                return;
+            }
+
+            const q = questions[currentIndex];
+            qTitle.innerText = q.title;
+            qVignette.innerText = q.vignette;
+            explanationBox.innerHTML = q.explanation;
+            explanationBox.classList.remove('show');
+            nextBtn.classList.remove('show');
+
+            optionsBox.innerHTML = "";
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => selectAnswer(idx);
+                optionsBox.appendChild(btn);
+            });
+
+            resetTimer();
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timeLeft = 60;
+            timerSpan.innerText = timeLeft;
+            timer = setInterval(() => {
+                timeLeft--;
+                timerSpan.innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        function handleTimeout() {
+            const q = questions[currentIndex];
+            const buttons = optionsBox.getElementsByTagName('button');
+            buttons[q.correct].classList.add('correct');
+            for (let btn of buttons) btn.classList.add('disabled');
+            explanationBox.classList.add('show');
+            nextBtn.classList.add('show');
+        }
+
+        function selectAnswer(selectedIndex) {
+            clearInterval(timer);
+            const q = questions[currentIndex];
+            const buttons = optionsBox.getElementsByTagName('button');
+
+            if (selectedIndex === q.correct) {
+                buttons[selectedIndex].classList.add('correct');
+                score++;
+            } else {
+                buttons[selectedIndex].classList.add('wrong');
+                buttons[q.correct].classList.add('correct');
+            }
+
+            for (let btn of buttons) btn.classList.add('disabled');
+            explanationBox.classList.add('show');
+            nextBtn.classList.add('show');
+
+            if (currentIndex === questions.length - 1) {
+                nextBtn.innerText = "View Results";
+            }
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            quizBody.style.display = 'none';
+            document.querySelector('.question-bar').style.display = 'none';
+            resultsScreen.classList.add('show');
+            finalScore.innerText = score;
+
+            if (score >= 4) {
+                performanceNote.innerText = "Outstanding! High-yield orthopedic concepts fully mastered.";
+            } else if (score >= 3) {
+                performanceNote.innerText = "Good performance! Review nerve motor vs sensory distributions.";
+            } else {
+                performanceNote.innerText = "Keep practicing! Focus on high-yield nerve palsies and bone tumor X-ray patterns.";
+            }
+        }
+
+        function restartQuiz() {
+            currentIndex = 0;
+            score = 0;
+            quizBody.style.display = 'block';
+            document.querySelector('.question-bar').style.display = 'flex';
+            resultsScreen.classList.remove('show');
+            nextBtn.innerText = "Next Question";
+            loadQuestion();
+        }
+
+        // Initialize first question
+        loadQuestion();
+    </script>
+</body>
+</html>
