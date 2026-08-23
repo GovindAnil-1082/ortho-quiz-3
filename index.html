@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+            <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -43,22 +43,22 @@
             border: 8px solid #2C3E35;
         }
 
-        /* Top Header with 3D G Logo */
+        /* Top Header with Sharpened 3D G Logo */
         .app-header {
-            padding: 20px 20px 10px 20px;
+            padding: 18px 20px 10px 20px;
             text-align: center;
             background-color: var(--bg-off-white);
             border-bottom: 1px solid var(--accent-tan);
         }
 
         .logo-container {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 8px auto;
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 6px auto;
         }
 
         .app-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: var(--text-dark);
             margin: 0;
@@ -209,17 +209,15 @@
 <body>
 
     <div class="phone-frame">
-        <!-- Header with 3D G Logo -->
+        <!-- Header with Sharpened Vector 3D G Logo -->
         <div class="app-header">
             <div class="logo-container">
-                <svg viewBox="0 0 100 100" width="100%" height="100%">
-                    <!-- 3D G Logo Vector Representation -->
-                    <path d="M20 30 L40 10 L50 20 L30 40 Z" fill="#4A5568"/>
-                    <rect x="25" y="25" width="15" height="15" fill="#2C3E35" stroke="#FFFFFF" stroke-width="2"/>
-                    <path d="M35 45 L75 45 L75 75 L35 75 L35 55 L55 55 L55 65 L65 65 L65 55 L45 55 Z" fill="#4A5568" stroke="#FFFFFF" stroke-width="2"/>
-                    <!-- 3D extrusion depth elements -->
-                    <polygon points="75,45 85,35 85,65 75,75" fill="#1A365D"/>
-                    <polygon points="35,75 45,85 85,85 75,75" fill="#1A365D"/>
+                <svg viewBox="0 0 100 100" width="100%" height="100%" shape-rendering="geometricPrecision">
+                    <!-- Crisp 3D G Geometry -->
+                    <rect x="15" y="15" width="22" height="22" fill="#4A5568" stroke="#2C3E35" stroke-width="4"/>
+                    <path d="M35 30 L80 30 L80 80 L35 80 L35 55 L60 55 L60 65 L70 65 L70 45 L35 45 Z" fill="#4A5568" stroke="#2C3E35" stroke-width="4"/>
+                    <polygon points="80,30 92,18 92,68 80,80" fill="#1A365D"/>
+                    <polygon points="35,80 47,92 92,92 80,80" fill="#1A365D"/>
                 </svg>
             </div>
             <h1 class="app-title">NEETworld Ortho</h1>
@@ -354,6 +352,9 @@
         }
 
         function handleTimeout() {
+            if ("vibrate" in navigator) {
+                navigator.vibrate([120, 50, 120]); // Hard vibration on timeout
+            }
             const q = questions[currentIndex];
             const buttons = optionsBox.getElementsByTagName('button');
             buttons[q.correct].classList.add('correct');
@@ -368,9 +369,17 @@
             const buttons = optionsBox.getElementsByTagName('button');
 
             if (selectedIndex === q.correct) {
+                // Mild vibration for correct/selecting
+                if ("vibrate" in navigator) {
+                    navigator.vibrate(40);
+                }
                 buttons[selectedIndex].classList.add('correct');
                 score++;
             } else {
+                // Hard/double vibration for wrong answer
+                if ("vibrate" in navigator) {
+                    navigator.vibrate([120, 50, 120]);
+                }
                 buttons[selectedIndex].classList.add('wrong');
                 buttons[q.correct].classList.add('correct');
             }
