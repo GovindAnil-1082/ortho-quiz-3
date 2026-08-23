@@ -1,9 +1,9 @@
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET PG Ortho High-Yield Quiz</title>
+    <title>NEET PG Ortho Advanced Clinical Vignettes</title>
     <style>
         /* Color Palette */
         :root {
@@ -43,7 +43,7 @@
             border: 8px solid #2C3E35;
         }
 
-        /* Top Header with Sharpened 3D G Logo */
+        /* Top Header with Crisp 3D G Logo */
         .app-header {
             padding: 18px 20px 10px 20px;
             text-align: center;
@@ -99,28 +99,28 @@
         }
 
         .vignette-text {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 500;
             line-height: 1.5;
             color: var(--text-dark);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         /* Options List */
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .option-btn {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 14px;
             background-color: white;
             border: 2px solid var(--soft-gray);
             border-radius: 12px;
             font-family: inherit;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: var(--text-dark);
             text-align: left;
@@ -154,12 +154,12 @@
         /* Explanation Box */
         .explanation-card {
             display: none;
-            margin-top: 20px;
+            margin-top: 15px;
             background-color: white;
             border-left: 4px solid var(--primary-green);
-            padding: 14px;
+            padding: 12px;
             border-radius: 8px;
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-dark);
             line-height: 1.4;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -209,11 +209,10 @@
 <body>
 
     <div class="phone-frame">
-        <!-- Header with Sharpened Vector 3D G Logo -->
+        <!-- Header with Sharp Vector 3D G Logo -->
         <div class="app-header">
             <div class="logo-container">
                 <svg viewBox="0 0 100 100" width="100%" height="100%" shape-rendering="geometricPrecision">
-                    <!-- Crisp 3D G Geometry -->
                     <rect x="15" y="15" width="22" height="22" fill="#4A5568" stroke="#2C3E35" stroke-width="4"/>
                     <path d="M35 30 L80 30 L80 80 L35 80 L35 55 L60 55 L60 65 L70 65 L70 45 L35 45 Z" fill="#4A5568" stroke="#2C3E35" stroke-width="4"/>
                     <polygon points="80,30 92,18 92,68 80,80" fill="#1A365D"/>
@@ -225,27 +224,27 @@
 
         <!-- Sticky Question Bar -->
         <div class="question-bar">
-            <h2 id="q-title" class="question-heading">Q1. Median Nerve</h2>
+            <h2 id="q-title" class="question-heading">Clinical Case 1</h2>
             <div class="timer-badge"><span id="timer">60</span>s</div>
         </div>
 
         <!-- Scrollable Content Area -->
         <div class="content-area">
             <div id="quiz-body">
-                <p id="q-vignette" class="vignette-text">A patient with a recent supracondylar humerus fracture is found to have difficulty with thumb abduction and a distinct 'ape hand' deformity. Which nerve is most likely involved?</p>
+                <p id="q-vignette" class="vignette-text"></p>
                 
                 <div id="options-box" class="options-container">
-                    <!-- Dynamic Options Inserted Here -->
+                    <!-- Options Inserted Dynamically -->
                 </div>
 
                 <div id="explanation" class="explanation-card">
-                    <!-- Explanation inserted here -->
+                    <!-- Explanation Inserted Dynamically -->
                 </div>
             </div>
 
             <div id="results-screen" class="results-card">
                 <h2>Quiz Complete! 🎉</h2>
-                <p>You scored <span id="final-score">0</span> / 5</p>
+                <p>You scored <span id="final-score">0</span> / 6</p>
                 <p id="performance-note" style="font-weight: 600; margin-top: 15px;"></p>
                 <button class="action-btn show" style="margin: 20px auto 0 auto;" onclick="restartQuiz()">Try Again</button>
             </div>
@@ -260,39 +259,76 @@
     <script>
         const questions = [
             {
-                title: "Q1. Median Nerve",
-                vignette: "A patient with a recent supracondylar humerus fracture is found to have difficulty with thumb abduction and a distinct 'ape hand' deformity. Which nerve is most likely involved?",
-                options: ["A) Ulnar Nerve", "B) Radial Nerve", "C) Posterior Interosseous Nerve", "D) Median Nerve"],
-                correct: 3,
-                explanation: "<strong>Correct: Median Nerve (D).</strong> Proximal median nerve injury causes ape hand deformity from loss of thenar muscle function. PIN and Radial nerves cause wrist drop; Ulnar nerve causes claw hand."
-            },
-            {
-                title: "Q2. Ulnar Nerve",
-                vignette: "A patient presents with a classic 'claw hand' deformity after an injury to the wrist. Which muscle group is primarily affected?",
-                options: ["A) Thenar muscles", "B) First and second lumbricals", "C) Third and fourth lumbricals", "D) Adductor pollicis"],
-                correct: 2,
-                explanation: "<strong>Correct: Third and fourth lumbricals (C).</strong> Distal ulnar nerve injury at the wrist results in clawing of the ring and little fingers due to paralysis of the ulnar-innervated lumbricals and interossei."
-            },
-            {
-                title: "Q3. PIN Palsy",
-                vignette: "A patient has difficulty extending their wrist at the MCP joints, exhibiting a complete wrist drop with *no* sensory loss. Which nerve compression syndrome is most likely?",
-                options: ["A) Median nerve at Carpal Tunnel", "B) Radial nerve at Spiral Groove", "C) Ulnar nerve at Cubital Tunnel", "D) Posterior Interosseous Nerve (PIN) in Radial Tunnel"],
-                correct: 3,
-                explanation: "<strong>Correct: PIN in Radial Tunnel (D).</strong> PIN is the pure motor branch of the radial nerve. Injury here gives wrist drop *without* sensory deficits, unlike proximal spiral groove lesions."
-            },
-            {
-                title: "Q4. Osteosarcoma",
-                vignette: "A 16-year-old male presents with dull aching pain in the distal femur. X-ray shows a blastic lesion with classic Codman’s triangle and a sunburst periosteal reaction. Most likely diagnosis?",
-                options: ["A) Osteoclastoma", "B) Osteosarcoma", "C) Ewing Sarcoma", "D) Osteoid Osteoma"],
+                title: "Clinical Case 1",
+                vignette: "A 7-year-old boy presents with high-grade fever, severe pain, and refusal to bear weight on his right lower limb following a minor skin abrasion 5 days ago. Examination reveals localized deep tenderness over the proximal tibial metaphysis. Initial plain X-ray shows only soft tissue swelling. Blood cultures grow *Staphylococcus aureus*. Which of the following best explains the pathophysiology and early management strategy?",
+                options: [
+                    "A) Normal early X-rays exclude infection; immediate open surgical debridement is mandatory to prevent epiphyseal destruction.",
+                    "B) Sluggish capillary loops and sharp looping end-arteries in the metaphysis trap bacteria; management requires empiric IV antibiotics for 48 hours before imaging changes appear, with MRI being the most sensitive early modality.",
+                    "C) Infection starts primarily in the joint space due to intra-capsular metaphysis; high-dose oral NSAIDs and rest are sufficient.",
+                    "D) The condition is driven by osteoclast hyperactivity; calcitonin therapy and strict immobilization prevent pathological fractures."
+                ],
                 correct: 1,
-                explanation: "<strong>Correct: Osteosarcoma (B).</strong> Codman’s triangle (elevated periosteum) and sunburst spicules of new bone formation in the metaphyseal region of long bones in adolescents are pathognomonic."
+                explanation: "<strong>Patho/Radio Correlation:</strong> Metaphyseal localization occurs due to sharp looping end-arteries with sluggish blood flow. S. aureus expresses fibronectin-binding proteins. X-rays lag behind pathology by 10-14 days (requires 30-50% bone mineral loss); MRI detects bone marrow edema within 24-48 hours. Early IV antibiotics prevent chronicity."
             },
             {
-                title: "Q5. Osteoclastoma",
-                vignette: "A 30-year-old female presents with progressive knee pain. X-ray of the distal femur reveals a large, eccentric, purely lytic 'soap bubble' lesion extending to the epiphysis. Most likely diagnosis?",
-                options: ["A) Osteosarcoma", "B) Osteoblastoma", "C) Giant Cell Tumor (Osteoclastoma)", "D) Chondrosarcoma"],
-                correct: 2,
-                explanation: "<strong>Correct: Giant Cell Tumor / Osteoclastoma (C).</strong> The classic 'soap bubble' appearance extending right up to the subchondral bone of the epiphysis in young adults is diagnostic for GCT."
+                title: "Clinical Case 2",
+                vignette: "A 35-year-old male with a history of an open tibia fracture 2 years ago presents with a chronic, non-healing draining sinus tract over the anteromedial leg, discharging pus and gritty fragments. X-ray shows dense cortical sclerosis surrounding a central radiolucent cavity containing dead bone fragments. What are these structures called and what is the definitive surgical management?",
+                options: [
+                    "A) Brodie abscess inside cancellous bone; treated effectively by percutaneous aspiration alone.",
+                    "B) Sequestrum of dead bone surrounded by involucrum (new bone) and cloaca (sinus opening); managed via radical sequestrectomy, excision of infected tracts, and dead space management.",
+                    "C) Osteoid osteoma with reactive bone sclerosis; managed by en-bloc excision of the nidus.",
+                    "D) Osteosarcoma with Codman's triangle; requires immediate limb salvage chemotherapy and wide resection."
+                ],
+                correct: 1,
+                explanation: "<strong>Patho/Management Correlation:</strong> Dead bone fragment is a *sequestrum*, new living bone formed by periosteum is the *involucrum*, and the opening through which pus drains is the *cloaca*. Definitive treatment requires surgical debridement (sequestrectomy) and eradication of dead space."
+            },
+            {
+                title: "Clinical Case 3",
+                vignette: "A 42-year-old patient from an endemic region presents with chronic back pain, constitutional symptoms, and progressive lower limb weakness over 3 months. Exam shows hyperreflexia and spastic paraparesis. MRI reveals D8-D9 vertebral destruction with a large pre-vertebral and epidural cold abscess causing cord compression. What is the true pathogenetic and management correlation?",
+                options: [
+                    "A) Early-onset paraplegia during active disease is typically caused by mechanical bony collapse, requiring emergency posterior stabilization.",
+                    "B) Early-onset paraplegia is driven by inflammatory components (abscess pressure, granulation tissue, caseous material or edema) and responds to medical therapy/ATT unless neurological deficits progress; late-onset paraplegia is mechanical.",
+                    "C) Intervertebral disc destruction is absent in spinal tuberculosis, differentiating it from pyogenic osteomyelitis.",
+                    "D) Corticosteroids are mandatory alongside Antitubercular Therapy (ATT) to accelerate spinal cord recovery."
+                ],
+                correct: 1,
+                explanation: "<strong>Patho-Clinical Correlation:</strong> Early-onset paraplegia occurs during active infection due to inflammatory elements, pus, or abscess pressure (treatable with strict bed rest + ATT). Late-onset paraplegia occurs long after healing due to mechanical deformity or spinal fibrosis, which requires surgical decompression."
+            },
+            {
+                title: "Clinical Case 4",
+                vignette: "An 11-year-old boy presents with a painful, rapidly growing mass in the mid-diaphysis of the left femur, accompanied by intermittent low-grade fever and weight loss. Radiograph shows an aggressive permeative lytic lesion in the diaphysis with an 'onion-skin' periosteal reaction. Biopsy shows small round blue cells positive for CD99 and the characteristic t(11;22) translocation. Which statement is correct?",
+                options: [
+                    "A) It is a benign epiphyseal tumor responding exclusively to radiation therapy.",
+                    "B) It is a small round blue cell tumor driven by the EWSR1-FLI1 fusion gene resulting from t(11;22), managed with multimodality neoadjuvant chemotherapy, local control (surgery/radiation), and adjuvant chemotherapy.",
+                    "C) It shares the sunburst reaction pathognomonic of osteosarcoma.",
+                    "D) It arises from multinucleated giant cells and exhibits a soap-bubble radiographic pattern."
+                ],
+                correct: 1,
+                explanation: "<strong>Patho/Radio Correlation:</strong> Ewing sarcoma is a malignant small round blue cell tumor characterized by the t(11;22) translocation forming the EWSR1-FLI1 fusion gene. It favors the diaphysis of long bones, shows an 'onion-skin' periosteal reaction, and is highly chemosensitive."
+            },
+            {
+                title: "Clinical Case 5",
+                vignette: "A 19-year-old male presents with deep, boring pain in his right thigh that is markedly worse at night and dramatically relieved by small doses of aspirin/NSAIDs. Plain radiograph and CT scan reveal a small, lucent central nidus (<1.5 cm) surrounded by a massive zone of reactive cortical bone sclerosis. What is the biochemical mediator and preferred treatment?",
+                options: [
+                    "A) High local concentrations of prostaglandins produced within the nidus; treated via CT-guided percutaneous radiofrequency ablation (RFA).",
+                    "B) Elevated local cortisol levels; managed by local steroid injections under fluoroscopy.",
+                    "C) Active bacterial proliferation inside the nidus; managed with long-term targeted intravenous antibiotics.",
+                    "D) Excessive osteoclast-mediated bone resorption; treated with high-dose bisphosphonates."
+                ],
+                correct: 0,
+                explanation: "<strong>Patho/Management Correlation:</strong> The nidus of an osteoid osteoma produces high levels of prostaglandins (specifically PGE2), which drive the severe night pain and prompt response to NSAIDs. CT-guided radiofrequency ablation (RFA) is the modern minimally invasive treatment of choice."
+            },
+            {
+                title: "Clinical Case 6",
+                vignette: "A 20-year-old male notices a hard, painless bony lump near his right knee joint, which grew slowly during childhood and stopped growing after skeletal maturity. X-ray shows a bone projection on the surface of the distal femur pointing away from the joint, with the host bone's medullary cavity continuous with the lesion's marrow space. What is the structural pathology and major complication to monitor?",
+                options: [
+                    "A) Malignant primary bone tumor; transformation into osteosarcoma within 5 years.",
+                    "B) Benign cartilage-capped bony projection (exostosis); risk of malignant transformation into chondrosarcoma if the cartilage cap thickness exceeds 1.5–2.0 cm in adulthood.",
+                    "C) Intra-articular synovial chondromatosis; risk of joint locking and secondary osteoarthritis.",
+                    "D) Post-traumatic myositis ossificans; risk of permanent joint ankylosis."
+                ],
+                correct: 1,
+                explanation: "<strong>Patho/Radio Correlation:</strong> Osteochondroma features cortical and medullary continuity with the parent bone. The key malignant complication is transformation into secondary chondrosarcoma, suspected clinically if growth resumes after skeletal maturity or if the cartilage cap exceeds 1.5–2 cm on MRI."
             }
         ];
 
@@ -353,7 +389,7 @@
 
         function handleTimeout() {
             if ("vibrate" in navigator) {
-                navigator.vibrate([120, 50, 120]); // Hard vibration on timeout
+                navigator.vibrate([120, 50, 120]);
             }
             const q = questions[currentIndex];
             const buttons = optionsBox.getElementsByTagName('button');
@@ -369,14 +405,12 @@
             const buttons = optionsBox.getElementsByTagName('button');
 
             if (selectedIndex === q.correct) {
-                // Mild vibration for correct/selecting
                 if ("vibrate" in navigator) {
                     navigator.vibrate(40);
                 }
                 buttons[selectedIndex].classList.add('correct');
                 score++;
             } else {
-                // Hard/double vibration for wrong answer
                 if ("vibrate" in navigator) {
                     navigator.vibrate([120, 50, 120]);
                 }
@@ -404,12 +438,12 @@
             resultsScreen.classList.add('show');
             finalScore.innerText = score;
 
-            if (score >= 4) {
-                performanceNote.innerText = "Outstanding! High-yield orthopedic concepts fully mastered.";
+            if (score >= 5) {
+                performanceNote.innerText = "Masterclass! Your pathoradiological correlations are NEET PG top-ranker level.";
             } else if (score >= 3) {
-                performanceNote.innerText = "Good performance! Review nerve motor vs sensory distributions.";
+                performanceNote.innerText = "Solid understanding! Review spine pathology and bone tumor translocations.";
             } else {
-                performanceNote.innerText = "Keep practicing! Focus on high-yield nerve palsies and bone tumor X-ray patterns.";
+                performanceNote.innerText = "Keep refining your concepts on infection timelines and radiographic signs.";
             }
         }
 
@@ -423,7 +457,6 @@
             loadQuestion();
         }
 
-        // Initialize first question
         loadQuestion();
     </script>
 </body>
