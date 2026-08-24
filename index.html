@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEETworld Pharmacology Masterclass</title>
+    <title>MEDSYNX | Dr. Govind</title>
     <style>
-        /* Color Palette */
+        /* Color Palette & Custom Variables */
         :root {
             --bg-off-white: #F3EFE3;
             --primary-green: #769382;
             --soft-gray: #C0C3B9;
             --accent-tan: #D5CBB9;
             --text-dark: #2C3E35;
-            --correct-green: #4CAF50;
-            --wrong-red: #E53935;
         }
 
         body {
@@ -27,7 +25,7 @@
             min-height: 100vh;
         }
 
-        /* Mobile Card Container UI */
+        /* Mobile Viewport Frame */
         .phone-frame {
             width: 100%;
             max-width: 390px;
@@ -35,7 +33,7 @@
             max-height: 844px;
             background-color: var(--bg-off-white);
             border-radius: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -43,421 +41,213 @@
             border: 8px solid #2C3E35;
         }
 
-        /* Top Header with Crisp 3D G Logo */
-        .app-header {
-            padding: 16px 20px 8px 20px;
+        /* HEADER */
+        header {
+            background-color: var(--primary-green);
+            padding: 20px 15px;
             text-align: center;
-            background-color: var(--bg-off-white);
-            border-bottom: 1px solid var(--accent-tan);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .logo-container {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 4px auto;
-        }
-
-        .app-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-dark);
+        header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--bg-off-white);
             margin: 0;
-            letter-spacing: -0.5px;
+            letter-spacing: 1px;
+            /* White outline & bottom shadow effect */
+            -webkit-text-stroke: 1px #FFFFFF;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
         }
 
-        /* Sticky Question Bar */
-        .question-bar {
+        /* NAV BOX */
+        nav {
             background-color: var(--accent-tan);
-            padding: 10px 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--soft-gray);
+            margin: 12px 16px 6px 16px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .question-heading {
-            font-size: 14px;
+        nav span {
+            font-size: 11px; /* 5 points smaller than standard text */
             font-weight: 700;
             color: var(--text-dark);
-            margin: 0;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        .timer-badge {
-            background-color: var(--wrong-red);
-            color: white;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 6px;
-        }
-
-        /* Scrollable Content Area */
-        .content-area {
+        /* MAIN CONTENT CONTAINER */
+        .main-content {
             flex: 1;
             overflow-y: auto;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* SECTION STYLING (Smooth rounded rectangles) */
+        section {
+            position: relative;
+            background-color: white;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid var(--accent-tan);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            transition: transform 0.2s ease;
+        }
+
+        section:active {
+            transform: scale(0.98);
+        }
+
+        /* Low opacity background image overlay */
+        .bg-ecg {
+            background: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), 
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+        }
+
+        .bg-lungs {
+            background: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), 
+                        url('https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+        }
+
+        .article-box {
             padding: 16px;
         }
 
-        .vignette-text {
-            font-size: 12.5px;
-            font-weight: 500;
-            line-height: 1.45;
-            color: var(--text-dark);
-            margin-bottom: 14px;
-        }
-
-        /* Options List */
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .option-btn {
-            width: 100%;
-            padding: 10px 12px;
-            background-color: white;
-            border: 2px solid var(--soft-gray);
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-dark);
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .option-btn:hover {
-            border-color: var(--primary-green);
-        }
-
-        /* Feedback States */
-        .option-btn.correct {
-            background-color: var(--correct-green) !important;
-            color: white !important;
-            border-color: #388E3C !important;
-        }
-
-        .option-btn.wrong {
-            background-color: var(--wrong-red) !important;
-            color: white !important;
-            border-color: #C62828 !important;
-        }
-
-        .option-btn.disabled {
-            pointer-events: none;
-            opacity: 0.85;
-        }
-
-        /* Explanation Box */
-        .explanation-card {
-            display: none;
-            margin-top: 12px;
-            background-color: white;
-            border-left: 4px solid var(--primary-green);
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 11.5px;
-            color: var(--text-dark);
-            line-height: 1.35;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-
-        .explanation-card.show {
-            display: block;
-        }
-
-        /* Footer Controls */
-        .footer-controls {
-            padding: 12px 18px;
-            background-color: var(--bg-off-white);
-            border-top: 1px solid var(--accent-tan);
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .action-btn {
-            display: none;
-            background-color: var(--primary-green);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            font-family: inherit;
-            font-size: 13px;
+        .section-tag {
+            font-size: 10px;
             font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
+            color: var(--primary-green);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
         }
 
-        .action-btn.show {
-            display: block;
+        .title-box {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0 0 6px 0;
         }
 
-        /* Results Screen */
-        .results-card {
-            display: none;
+        .p-box {
+            font-size: 12px;
+            color: #555555;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* ASIDE BOX (Interactive Pharma Quiz Link) */
+        aside {
+            background: linear-gradient(rgba(118, 147, 130, 0.92), rgba(118, 147, 130, 0.92)), 
+                        url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
+            border-radius: 18px;
+            padding: 20px 16px;
             text-align: center;
-            padding: 30px 15px;
-        }
-        .results-card.show {
+            color: white;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            text-decoration: none;
             display: block;
+            border: 2px solid var(--accent-tan);
+            transition: all 0.2s ease;
+        }
+
+        aside:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+        }
+
+        aside h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 6px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        aside p {
+            font-size: 12px;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--accent-tan);
+            padding: 12px;
+            text-align: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            font-size: 11px;
+            color: var(--text-dark);
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
     <div class="phone-frame">
-        <!-- Header with Sharp Vector 3D G Logo -->
-        <div class="app-header">
-            <div class="logo-container">
-                <svg viewBox="0 0 100 100" width="100%" height="100%" shape-rendering="geometricPrecision">
-                    <rect x="15" y="15" width="22" height="22" fill="#4A5568" stroke="#2C3E35" stroke-width="4"/>
-                    <path d="M35 30 L80 30 L80 80 L35 80 L35 55 L60 55 L60 65 L70 65 L70 45 L35 45 Z" fill="#4A5568" stroke="#2C3E35" stroke-width="4"/>
-                    <polygon points="80,30 92,18 92,68 80,80" fill="#1A365D"/>
-                    <polygon points="35,80 47,92 92,92 80,80" fill="#1A365D"/>
-                </svg>
-            </div>
-            <h1 class="app-title">NEETworld Pharma</h1>
-        </div>
+        <!-- HEADER -->
+        <header>
+            <h1>MEDSYNX</h1>
+        </header>
 
-        <!-- Sticky Question Bar -->
-        <div class="question-bar">
-            <h2 id="q-title" class="question-heading">Pharma Case 1</h2>
-            <div class="timer-badge"><span id="timer">60</span>s</div>
-        </div>
+        <!-- NAV BOX -->
+        <nav>
+            <span>Dr. GOVIND, MBBS</span>
+        </nav>
 
-        <!-- Scrollable Content Area -->
-        <div class="content-area">
-            <div id="quiz-body">
-                <p id="q-vignette" class="vignette-text"></p>
-                
-                <div id="options-box" class="options-container">
-                    <!-- Options Inserted Dynamically -->
+        <!-- MAIN CONTENT AREA -->
+        <div class="main-content">
+            
+            <!-- SECTION 1: ECG -->
+            <section class="bg-ecg">
+                <div class="article-box">
+                    <div class="section-tag">Section 01</div>
+                    <h2 class="title-box">Basics of ECG</h2>
+                    <p class="p-box">Master electrical axes, interval calculations, and high-yield arrhythmia recognition for clinical practice and exams.</p>
                 </div>
+            </section>
 
-                <div id="explanation" class="explanation-card">
-                    <!-- Explanation Inserted Dynamically -->
+            <!-- SECTION 2: CHEST EXAMINATION -->
+            <section class="bg-lungs">
+                <div class="article-box">
+                    <div class="section-tag">Section 02</div>
+                    <h2 class="title-box">Basics of Chest Examination</h2>
+                    <p class="p-box">Systematic approach to inspection, palpation, percussion, and auscultation findings in respiratory pathology.</p>
                 </div>
-            </div>
+            </section>
 
-            <div id="results-screen" class="results-card">
-                <h2>Quiz Complete! 🎉</h2>
-                <p>You scored <span id="final-score">0</span> / 6</p>
-                <p id="performance-note" style="font-weight: 600; margin-top: 15px;"></p>
-                <button class="action-btn show" style="margin: 20px auto 0 auto;" onclick="restartQuiz()">Try Again</button>
-            </div>
+            <!-- ASIDE: PHARMA QUIZ LINK -->
+            <aside onclick="openPharmaQuiz()">
+                <h3>Try this quiz on Pharmacology for NEET PG</h3>
+                <p>Tap here to launch high-yield clinical vignettes & timer challenge →</p>
+            </aside>
+
         </div>
 
-        <!-- Footer Button -->
-        <div class="footer-controls">
-            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Next Question</button>
-        </div>
+        <!-- FOOTER -->
+        <footer>
+            © Copyright 2026 GitHub.io
+        </footer>
     </div>
 
     <script>
-        const questions = [
-            {
-                title: "Pharma Case 1",
-                vignette: "A 52-year-old chronic arthritic patient self-administers massive doses of a household anti-inflammatory drug. He presents to the ER with central tinnitus, hyperventilation, diaphoresis, and altered sensorium. ABG demonstrates a mixed primary respiratory alkalosis and high-anion-gap metabolic acidosis. Which drug is the culprit and what is its primary cellular mechanism of toxicity?",
-                options: [
-                    "A) Acetaminophen; hepatic CYP2E1 saturation generating toxic NAPQI.",
-                    "B) Aspirin (Salicylate); direct stimulation of the medullary respiratory center causing hyperventilation, and uncoupling of oxidative phosphorylation in mitochondria.",
-                    "C) Ibuprofen; reversible COX-1/COX-2 inhibition leading to medullary renal papillary necrosis.",
-                    "D) Naproxen; direct competitive antagonism at GABA-A chloride channels causing seizures."
-                ],
-                correct: 1,
-                explanation: "<strong>Mechanism & Toxicity:</strong> Salicylates stimulate the respiratory center in the medulla directly, leading to early hyperventilation (respiratory alkalosis). Systemically, they uncouple mitochondrial oxidative phosphorylation, halting ATP production and driving anaerobic glycolysis (metabolic acidosis)."
-            },
-            {
-                title: "Pharma Case 2",
-                vignette: "A 64-year-old hypertensive patient is managed with a multi-drug regimen comprising Amlodipine, Hydrochlorothiazide, and an agent that selectively blocks angiotensin II AT1 receptors. Two weeks later, routine labs show a 35% surge in serum creatinine and severe hyperkalemia. Which drug in his combination regimen is the culprit and what is its renal hemodynamic effect?",
-                options: [
-                    "A) Amlodipine; causes selective constriction of the afferent glomerular arteriole.",
-                    "B) Hydrochlorothiazide; blocks sodium-chloride cotransporters in the distal convoluted tubule, causing potassium dumping.",
-                    "C) Valsartan (ARB); blocks angiotensin II-mediated constriction of the efferent arteriole, dropping GFR, and reduces aldosterone secretion leading to potassium retention.",
-                    "D) All drugs equally contributed to tubular necrosis."
-                ],
-                correct: 2,
-                explanation: "<strong>Culprit & Mechanism:</strong> ARBs (and ACE inhibitors) block AT1 receptors, preventing efferent arteriolar constriction. This drops intraglomerular pressure, causing a temporary creatinine rise, and blocks aldosterone production, resulting in hyperkalemia."
-            },
-            {
-                title: "Pharma Case 3",
-                vignette: "During rapid sequence intubation, a resident administers a neuromuscular blocker. Within minutes, the patient exhibits widespread muscle fasciculations, followed by flaccid paralysis, transient hyperkalemia, and a sudden spike in body temperature with muscle rigidity. Which specific drug was given and on what receptor does it act?",
-                options: [
-                    "A) Rocuronium; competitive antagonist at postsynaptic nicotinic receptors (Nm).",
-                    "B) Succinylcholine; depolarizing agonist at motor endplate nicotinic acetylcholine receptors (Nm), triggering prolonged channel opening.",
-                    "C) Atracurium; non-depolarizing blocker cleared via Hofmann elimination.",
-                    "D) Pancuronium; vagolytic non-depolarizing agent acting on muscarinic M2 receptors."
-                ],
-                correct: 1,
-                explanation: "<strong>Receptor & Drug:</strong> Succinylcholine acts as a strong agonist at Nm receptors. Initial persistent depolarization causes fasciculations. It carries a black-box warning for hyperkalemia and triggering malignant hyperthermia in susceptible individuals."
-            },
-            {
-                title: "Pharma Case 4",
-                vignette: "A 28-year-old agricultural worker is rushed to the ER following accidental organophosphate exposure. Residents administer high-dose Atropine, but the patient continues to exhibit severe generalized muscle fasciculations and respiratory muscle weakness. Which specific adjunct antidote must be administered immediately, and what is its chemical mechanism?",
-                options: [
-                    "A) Flumazenil; competitive antagonist at central benzodiazepine receptors.",
-                    "B) Pralidoxime (2-PAM); reactivates acetylcholinesterase by binding to the anionic site and cleaving the covalent phosphate-enzyme bond.",
-                    "C) N-acetylcysteine; restores intracellular glutathione reserves.",
-                    "D) Physostigmine; reversible central-acting tertiary amine carbamate inhibitor."
-                ],
-                correct: 1,
-                explanation: "<strong>Antidote Action:</strong> Atropine blocks muscarinic receptors but has *no* effect on nicotinic receptors at the neuromuscular junction (fasciculations/weakness). Pralidoxime acts as a cholinesterase reactivator, breaking the bond before 'aging' occurs."
-            },
-            {
-                title: "Pharma Case 5",
-                vignette: "In a pharmacology practical experiment, a resident evaluates two enzyme inhibitors. Adding **Drug X** increases the apparent $K_m$ while leaving $V_{max}$ completely unchanged. Adding **Drug Y** decreases the $V_{max}$ while leaving $K_m$ unchanged. What type of enzyme inhibition do Drug X and Drug Y represent, respectively?",
-                options: [
-                    "A) Drug X is Non-competitive; Drug Y is Uncompetitive.",
-                    "B) Drug X is Competitive inhibition; Drug Y is Non-competitive inhibition.",
-                    "C) Drug X is Uncompetitive; Drug Y is Competitive.",
-                    "D) Both represent mixed allosteric inhibition."
-                ],
-                correct: 1,
-                explanation: "<strong>Enzyme Kinetics:</strong> Competitive inhibitors (Drug X) bind the active site, overcoming high substrate concentration ($K_m$ increases, $V_{max}$ unchanged). Non-competitive inhibitors (Drug Y) bind allosteric sites, lowering functional enzyme capacity ($V_{max}$ decreases, $K_m$ unchanged)."
-            },
-            {
-                title: "Pharma Case 6",
-                vignette: "A 55-year-old male treated for deep vein thrombosis develops painful, dark necrotic skin lesions on his abdomen and thighs 4 days after initiation of therapy. Lab tests show a rapid depletion of Protein C and Protein S alongside a transient hypercoagulable state. Which drug was started without adequate overlap, and what is its mechanism?",
-                options: [
-                    "A) Unfractionated Heparin; binds antithrombin III to inhibit Factor Xa.",
-                    "B) Warfarin; inhibits vitamin K epoxide reductase (VKORC1), causing rapid loss of short half-life endogenous anticoagulants (Proteins C & S) before factors II, IX, and X clear.",
-                    "C) Direct Oral Anticoagulant (Rivaroxaban); direct factor Xa inhibitor.",
-                    "D) Low Molecular Weight Heparin; suppresses platelet aggregation."
-                ],
-                correct: 1,
-                explanation: "<strong>Adverse Effect & Mechanism:</strong> Warfarin inhibits Vitamin K recycling. Because Proteins C and S have shorter half-lives than clotting factors II, IX, and X, they drop first, precipitating transient hypercoagulability and warfarin-induced skin necrosis if heparin overlap is omitted."
-            }
-        ];
-
-        let currentIndex = 0;
-        let score = 0;
-        let timer;
-        let timeLeft = 60;
-
-        const qTitle = document.getElementById('q-title');
-        const qVignette = document.getElementById('q-vignette');
-        const optionsBox = document.getElementById('options-box');
-        const explanationBox = document.getElementById('explanation');
-        const nextBtn = document.getElementById('next-btn');
-        const timerSpan = document.getElementById('timer');
-        const quizBody = document.getElementById('quiz-body');
-        const resultsScreen = document.getElementById('results-screen');
-        const finalScore = document.getElementById('final-score');
-        const performanceNote = document.getElementById('performance-note');
-
-        function loadQuestion() {
-            if (currentIndex >= questions.length) {
-                showResults();
-                return;
-            }
-
-            const q = questions[currentIndex];
-            qTitle.innerText = q.title;
-            qVignette.innerText = q.vignette;
-            explanationBox.innerHTML = q.explanation;
-            explanationBox.classList.remove('show');
-            nextBtn.classList.remove('show');
-
-            optionsBox.innerHTML = "";
-            q.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt;
-                btn.onclick = () => selectAnswer(idx);
-                optionsBox.appendChild(btn);
-            });
-
-            resetTimer();
-        }
-
-        function resetTimer() {
-            clearInterval(timer);
-            timeLeft = 60;
-            timerSpan.innerText = timeLeft;
-            timer = setInterval(() => {
-                timeLeft--;
-                timerSpan.innerText = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    handleTimeout();
-                }
-            }, 1000);
-        }
-
-        function handleTimeout() {
+        function openPharmaQuiz() {
+            // Haptic feedback vibration on touch
             if ("vibrate" in navigator) {
-                navigator.vibrate([120, 50, 120]);
+                navigator.vibrate(50);
             }
-            const q = questions[currentIndex];
-            const buttons = optionsBox.getElementsByTagName('button');
-            buttons[q.correct].classList.add('correct');
-            for (let btn of buttons) btn.classList.add('disabled');
-            explanationBox.classList.add('show');
-            nextBtn.classList.add('show');
+            // Redirects to your pharmacology quiz repository link
+            // Update this URL to match your exact pharma quiz GitHub Pages link if needed
+            window.location.href = "https://GovindAnil-1082.github.io/ortho-quiz-2/"; 
         }
-
-        function selectAnswer(selectedIndex) {
-            clearInterval(timer);
-            const q = questions[currentIndex];
-            const buttons = optionsBox.getElementsByTagName('button');
-
-            if (selectedIndex === q.correct) {
-                if ("vibrate" in navigator) {
-                    navigator.vibrate(40);
-                }
-                buttons[selectedIndex].classList.add('correct');
-                score++;
-            } else {
-                if ("vibrate" in navigator) {
-                    navigator.vibrate([120, 50, 120]);
-                }
-                buttons[selectedIndex].classList.add('wrong');
-                buttons[q.correct].classList.add('correct');
-            }
-
-            for (let btn of buttons) btn.classList.add('disabled');
-            explanationBox.classList.add('show');
-            nextBtn.classList.add('show');
-
-            if (currentIndex === questions.length - 1) {
-                nextBtn.innerText = "View Results";
-            }
-        }
-
-        function nextQuestion() {
-            currentIndex++;
-            loadQuestion();
-        }
-
-        function showResults() {
-            quizBody.style.display = 'none';
-            document.querySelector('.question-bar').style.display = 'none';
-            resultsScreen.classList.add('show');
-            finalScore.innerText = score;
-
-            if (score >= 5) {
-                performanceNote.innerText = "Brilliant pharmacology grasp! You're cracking clinical correlations easily.";
-            } else if (score >= 3) {
-                performanceNote.innerText = "Good job! Review enzyme kinetics and drug-induced adverse effects.";
-            } else {
-                performanceNote.innerText = "Keep revising toxidromes, receptor blockers, and anticoagulant mechanisms.";
-            }
-        }
-
-        function restartQuiz() {
-            currentIndex = 0;
-            score = 0;
-            quizBody.style.display = 'block';
-            document.querySelector('.question-bar').style.display = 'flex';
-            resultsScreen.classList.remove('show');
-            nextBtn.innerText = "Next Question";
-            loadQuestion();
-        }
-
-        loadQuestion();
     </script>
 </body>
 </html>
