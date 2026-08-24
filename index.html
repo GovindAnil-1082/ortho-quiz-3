@@ -41,17 +41,37 @@
             border: 8px solid #2C3E35;
         }
 
-        /* HEADER with Running ECG Animation Background */
+        /* HEADER with Native Animated Running ECG Background */
         header {
             position: relative;
-            background: linear-gradient(rgba(118, 147, 130, 0.78), rgba(44, 62, 53, 0.85)), 
-                        url('https://i.imgur.com/8Qp2q5b.gif') center/cover no-repeat; /* Running ECG animation layer */
+            background: linear-gradient(135deg, #1b2821, #2C3E35, #769382);
             padding: 24px 15px;
             text-align: center;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
             overflow: hidden;
+        }
+
+        /* ECG Animation Container */
+        .ecg-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.65;
+            pointer-events: none;
+        }
+
+        .ecg-group {
+            animation: scroll-ecg 3s linear infinite;
+        }
+
+        @keyframes scroll-ecg {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-500px); }
         }
 
         header h1 {
@@ -64,7 +84,7 @@
             letter-spacing: 1.5px;
             /* White outline & distinct bottom shadow effect */
             -webkit-text-stroke: 1px #FFFFFF;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
         }
 
         /* NAV BOX */
@@ -199,8 +219,15 @@
 <body>
 
     <div class="phone-frame">
-        <!-- HEADER with Running ECG Animation Background -->
+        <!-- HEADER with Native Animated Running ECG Background -->
         <header>
+            <div class="ecg-bg">
+                <svg viewBox="0 0 1000 100" preserveAspectRatio="none" width="100%" height="100%">
+                    <g class="ecg-group">
+                        <path d="M0,50 L70,50 L85,15 L100,85 L115,35 L130,50 L250,50 L320,50 L335,15 L350,85 L365,35 L380,50 L500,50 L570,50 L585,15 L600,85 L615,35 L630,50 L750,50 L820,50 L835,15 L850,85 L865,35 L880,50 L1000,50" fill="none" stroke="#00ffff" stroke-width="3.5" stroke-linecap="round" filter="drop-shadow(0 0 4px #00ffff)"/>
+                    </g>
+                </svg>
+            </div>
             <h1>MEDSYNX</h1>
         </header>
 
@@ -209,7 +236,7 @@
             <span>Dr. GOVIND, MBBS</span>
         </nav>
 
-        <!-- MAIN CONTENT AREA -->
+        <!-- MAIN CONTENT CONTAINER -->
         <div class="main-content">
             
             <!-- SECTION 1: ECG -->
