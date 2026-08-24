@@ -41,25 +41,30 @@
             border: 8px solid #2C3E35;
         }
 
-        /* HEADER */
+        /* HEADER with Running ECG Animation Background */
         header {
-            background-color: var(--primary-green);
-            padding: 20px 15px;
+            position: relative;
+            background: linear-gradient(rgba(118, 147, 130, 0.78), rgba(44, 62, 53, 0.85)), 
+                        url('https://i.imgur.com/8Qp2q5b.gif') center/cover no-repeat; /* Running ECG animation layer */
+            padding: 24px 15px;
             text-align: center;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
 
         header h1 {
-            font-size: 28px;
+            position: relative;
+            z-index: 2;
+            font-size: 30px;
             font-weight: 800;
             color: var(--bg-off-white);
             margin: 0;
-            letter-spacing: 1px;
-            /* White outline & bottom shadow effect */
+            letter-spacing: 1.5px;
+            /* White outline & distinct bottom shadow effect */
             -webkit-text-stroke: 1px #FFFFFF;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         /* NAV BOX */
@@ -73,7 +78,7 @@
         }
 
         nav span {
-            font-size: 11px; /* 5 points smaller than standard text */
+            font-size: 11px; /* 5 points smaller than standard body text */
             font-weight: 700;
             color: var(--text-dark);
             letter-spacing: 0.5px;
@@ -105,7 +110,7 @@
             transform: scale(0.98);
         }
 
-        /* Low opacity background image overlay */
+        /* Low opacity background image overlays */
         .bg-ecg {
             background: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), 
                         url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
@@ -168,6 +173,7 @@
             font-size: 16px;
             font-weight: 700;
             margin: 0 0 6px 0;
+            text-align: center;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
@@ -193,7 +199,7 @@
 <body>
 
     <div class="phone-frame">
-        <!-- HEADER -->
+        <!-- HEADER with Running ECG Animation Background -->
         <header>
             <h1>MEDSYNX</h1>
         </header>
@@ -240,12 +246,9 @@
 
     <script>
         function openPharmaQuiz() {
-            // Haptic feedback vibration on touch
             if ("vibrate" in navigator) {
                 navigator.vibrate(50);
             }
-            // Redirects to your pharmacology quiz repository link
-            // Update this URL to match your exact pharma quiz GitHub Pages link if needed
             window.location.href = "https://GovindAnil-1082.github.io/ortho-quiz-2/"; 
         }
     </script>
