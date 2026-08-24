@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEET PG Ortho Advanced Clinical Vignettes</title>
+    <title>NEETworld Pharmacology Masterclass</title>
     <style>
         /* Color Palette */
         :root {
@@ -45,20 +45,20 @@
 
         /* Top Header with Crisp 3D G Logo */
         .app-header {
-            padding: 18px 20px 10px 20px;
+            padding: 16px 20px 8px 20px;
             text-align: center;
             background-color: var(--bg-off-white);
             border-bottom: 1px solid var(--accent-tan);
         }
 
         .logo-container {
-            width: 44px;
-            height: 44px;
-            margin: 0 auto 6px auto;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 4px auto;
         }
 
         .app-title {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-dark);
             margin: 0;
@@ -68,7 +68,7 @@
         /* Sticky Question Bar */
         .question-bar {
             background-color: var(--accent-tan);
-            padding: 12px 20px;
+            padding: 10px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -76,7 +76,7 @@
         }
 
         .question-heading {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--text-dark);
             margin: 0;
@@ -85,9 +85,9 @@
         .timer-badge {
             background-color: var(--wrong-red);
             color: white;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 6px;
         }
 
@@ -95,32 +95,32 @@
         .content-area {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 16px;
         }
 
         .vignette-text {
-            font-size: 13.5px;
+            font-size: 12.5px;
             font-weight: 500;
-            line-height: 1.5;
+            line-height: 1.45;
             color: var(--text-dark);
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
 
         /* Options List */
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .option-btn {
             width: 100%;
-            padding: 12px 14px;
+            padding: 10px 12px;
             background-color: white;
             border: 2px solid var(--soft-gray);
-            border-radius: 12px;
+            border-radius: 10px;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-dark);
             text-align: left;
@@ -154,14 +154,14 @@
         /* Explanation Box */
         .explanation-card {
             display: none;
-            margin-top: 15px;
+            margin-top: 12px;
             background-color: white;
             border-left: 4px solid var(--primary-green);
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 11.5px;
             color: var(--text-dark);
-            line-height: 1.4;
+            line-height: 1.35;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
@@ -171,7 +171,7 @@
 
         /* Footer Controls */
         .footer-controls {
-            padding: 15px 20px;
+            padding: 12px 18px;
             background-color: var(--bg-off-white);
             border-top: 1px solid var(--accent-tan);
             display: flex;
@@ -183,9 +183,9 @@
             background-color: var(--primary-green);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             font-family: inherit;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
@@ -199,7 +199,7 @@
         .results-card {
             display: none;
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 15px;
         }
         .results-card.show {
             display: block;
@@ -219,12 +219,12 @@
                     <polygon points="35,80 47,92 92,92 80,80" fill="#1A365D"/>
                 </svg>
             </div>
-            <h1 class="app-title">NEETworld Ortho</h1>
+            <h1 class="app-title">NEETworld Pharma</h1>
         </div>
 
         <!-- Sticky Question Bar -->
         <div class="question-bar">
-            <h2 id="q-title" class="question-heading">Clinical Case 1</h2>
+            <h2 id="q-title" class="question-heading">Pharma Case 1</h2>
             <div class="timer-badge"><span id="timer">60</span>s</div>
         </div>
 
@@ -259,76 +259,76 @@
     <script>
         const questions = [
             {
-                title: "Clinical Case 1",
-                vignette: "A 7-year-old boy presents with high-grade fever, severe pain, and refusal to bear weight on his right lower limb following a minor skin abrasion 5 days ago. Examination reveals localized deep tenderness over the proximal tibial metaphysis. Initial plain X-ray shows only soft tissue swelling. Blood cultures grow *Staphylococcus aureus*. Which of the following best explains the pathophysiology and early management strategy?",
+                title: "Pharma Case 1",
+                vignette: "A 52-year-old chronic arthritic patient self-administers massive doses of a household anti-inflammatory drug. He presents to the ER with central tinnitus, hyperventilation, diaphoresis, and altered sensorium. ABG demonstrates a mixed primary respiratory alkalosis and high-anion-gap metabolic acidosis. Which drug is the culprit and what is its primary cellular mechanism of toxicity?",
                 options: [
-                    "A) Normal early X-rays exclude infection; immediate open surgical debridement is mandatory to prevent epiphyseal destruction.",
-                    "B) Sluggish capillary loops and sharp looping end-arteries in the metaphysis trap bacteria; management requires empiric IV antibiotics for 48 hours before imaging changes appear, with MRI being the most sensitive early modality.",
-                    "C) Infection starts primarily in the joint space due to intra-capsular metaphysis; high-dose oral NSAIDs and rest are sufficient.",
-                    "D) The condition is driven by osteoclast hyperactivity; calcitonin therapy and strict immobilization prevent pathological fractures."
+                    "A) Acetaminophen; hepatic CYP2E1 saturation generating toxic NAPQI.",
+                    "B) Aspirin (Salicylate); direct stimulation of the medullary respiratory center causing hyperventilation, and uncoupling of oxidative phosphorylation in mitochondria.",
+                    "C) Ibuprofen; reversible COX-1/COX-2 inhibition leading to medullary renal papillary necrosis.",
+                    "D) Naproxen; direct competitive antagonism at GABA-A chloride channels causing seizures."
                 ],
                 correct: 1,
-                explanation: "<strong>Patho/Radio Correlation:</strong> Metaphyseal localization occurs due to sharp looping end-arteries with sluggish blood flow. S. aureus expresses fibronectin-binding proteins. X-rays lag behind pathology by 10-14 days (requires 30-50% bone mineral loss); MRI detects bone marrow edema within 24-48 hours. Early IV antibiotics prevent chronicity."
+                explanation: "<strong>Mechanism & Toxicity:</strong> Salicylates stimulate the respiratory center in the medulla directly, leading to early hyperventilation (respiratory alkalosis). Systemically, they uncouple mitochondrial oxidative phosphorylation, halting ATP production and driving anaerobic glycolysis (metabolic acidosis)."
             },
             {
-                title: "Clinical Case 2",
-                vignette: "A 35-year-old male with a history of an open tibia fracture 2 years ago presents with a chronic, non-healing draining sinus tract over the anteromedial leg, discharging pus and gritty fragments. X-ray shows dense cortical sclerosis surrounding a central radiolucent cavity containing dead bone fragments. What are these structures called and what is the definitive surgical management?",
+                title: "Pharma Case 2",
+                vignette: "A 64-year-old hypertensive patient is managed with a multi-drug regimen comprising Amlodipine, Hydrochlorothiazide, and an agent that selectively blocks angiotensin II AT1 receptors. Two weeks later, routine labs show a 35% surge in serum creatinine and severe hyperkalemia. Which drug in his combination regimen is the culprit and what is its renal hemodynamic effect?",
                 options: [
-                    "A) Brodie abscess inside cancellous bone; treated effectively by percutaneous aspiration alone.",
-                    "B) Sequestrum of dead bone surrounded by involucrum (new bone) and cloaca (sinus opening); managed via radical sequestrectomy, excision of infected tracts, and dead space management.",
-                    "C) Osteoid osteoma with reactive bone sclerosis; managed by en-bloc excision of the nidus.",
-                    "D) Osteosarcoma with Codman's triangle; requires immediate limb salvage chemotherapy and wide resection."
+                    "A) Amlodipine; causes selective constriction of the afferent glomerular arteriole.",
+                    "B) Hydrochlorothiazide; blocks sodium-chloride cotransporters in the distal convoluted tubule, causing potassium dumping.",
+                    "C) Valsartan (ARB); blocks angiotensin II-mediated constriction of the efferent arteriole, dropping GFR, and reduces aldosterone secretion leading to potassium retention.",
+                    "D) All drugs equally contributed to tubular necrosis."
+                ],
+                correct: 2,
+                explanation: "<strong>Culprit & Mechanism:</strong> ARBs (and ACE inhibitors) block AT1 receptors, preventing efferent arteriolar constriction. This drops intraglomerular pressure, causing a temporary creatinine rise, and blocks aldosterone production, resulting in hyperkalemia."
+            },
+            {
+                title: "Pharma Case 3",
+                vignette: "During rapid sequence intubation, a resident administers a neuromuscular blocker. Within minutes, the patient exhibits widespread muscle fasciculations, followed by flaccid paralysis, transient hyperkalemia, and a sudden spike in body temperature with muscle rigidity. Which specific drug was given and on what receptor does it act?",
+                options: [
+                    "A) Rocuronium; competitive antagonist at postsynaptic nicotinic receptors (Nm).",
+                    "B) Succinylcholine; depolarizing agonist at motor endplate nicotinic acetylcholine receptors (Nm), triggering prolonged channel opening.",
+                    "C) Atracurium; non-depolarizing blocker cleared via Hofmann elimination.",
+                    "D) Pancuronium; vagolytic non-depolarizing agent acting on muscarinic M2 receptors."
                 ],
                 correct: 1,
-                explanation: "<strong>Patho/Management Correlation:</strong> Dead bone fragment is a *sequestrum*, new living bone formed by periosteum is the *involucrum*, and the opening through which pus drains is the *cloaca*. Definitive treatment requires surgical debridement (sequestrectomy) and eradication of dead space."
+                explanation: "<strong>Receptor & Drug:</strong> Succinylcholine acts as a strong agonist at Nm receptors. Initial persistent depolarization causes fasciculations. It carries a black-box warning for hyperkalemia and triggering malignant hyperthermia in susceptible individuals."
             },
             {
-                title: "Clinical Case 3",
-                vignette: "A 42-year-old patient from an endemic region presents with chronic back pain, constitutional symptoms, and progressive lower limb weakness over 3 months. Exam shows hyperreflexia and spastic paraparesis. MRI reveals D8-D9 vertebral destruction with a large pre-vertebral and epidural cold abscess causing cord compression. What is the true pathogenetic and management correlation?",
+                title: "Pharma Case 4",
+                vignette: "A 28-year-old agricultural worker is rushed to the ER following accidental organophosphate exposure. Residents administer high-dose Atropine, but the patient continues to exhibit severe generalized muscle fasciculations and respiratory muscle weakness. Which specific adjunct antidote must be administered immediately, and what is its chemical mechanism?",
                 options: [
-                    "A) Early-onset paraplegia during active disease is typically caused by mechanical bony collapse, requiring emergency posterior stabilization.",
-                    "B) Early-onset paraplegia is driven by inflammatory components (abscess pressure, granulation tissue, caseous material or edema) and responds to medical therapy/ATT unless neurological deficits progress; late-onset paraplegia is mechanical.",
-                    "C) Intervertebral disc destruction is absent in spinal tuberculosis, differentiating it from pyogenic osteomyelitis.",
-                    "D) Corticosteroids are mandatory alongside Antitubercular Therapy (ATT) to accelerate spinal cord recovery."
+                    "A) Flumazenil; competitive antagonist at central benzodiazepine receptors.",
+                    "B) Pralidoxime (2-PAM); reactivates acetylcholinesterase by binding to the anionic site and cleaving the covalent phosphate-enzyme bond.",
+                    "C) N-acetylcysteine; restores intracellular glutathione reserves.",
+                    "D) Physostigmine; reversible central-acting tertiary amine carbamate inhibitor."
                 ],
                 correct: 1,
-                explanation: "<strong>Patho-Clinical Correlation:</strong> Early-onset paraplegia occurs during active infection due to inflammatory elements, pus, or abscess pressure (treatable with strict bed rest + ATT). Late-onset paraplegia occurs long after healing due to mechanical deformity or spinal fibrosis, which requires surgical decompression."
+                explanation: "<strong>Antidote Action:</strong> Atropine blocks muscarinic receptors but has *no* effect on nicotinic receptors at the neuromuscular junction (fasciculations/weakness). Pralidoxime acts as a cholinesterase reactivator, breaking the bond before 'aging' occurs."
             },
             {
-                title: "Clinical Case 4",
-                vignette: "An 11-year-old boy presents with a painful, rapidly growing mass in the mid-diaphysis of the left femur, accompanied by intermittent low-grade fever and weight loss. Radiograph shows an aggressive permeative lytic lesion in the diaphysis with an 'onion-skin' periosteal reaction. Biopsy shows small round blue cells positive for CD99 and the characteristic t(11;22) translocation. Which statement is correct?",
+                title: "Pharma Case 5",
+                vignette: "In a pharmacology practical experiment, a resident evaluates two enzyme inhibitors. Adding **Drug X** increases the apparent $K_m$ while leaving $V_{max}$ completely unchanged. Adding **Drug Y** decreases the $V_{max}$ while leaving $K_m$ unchanged. What type of enzyme inhibition do Drug X and Drug Y represent, respectively?",
                 options: [
-                    "A) It is a benign epiphyseal tumor responding exclusively to radiation therapy.",
-                    "B) It is a small round blue cell tumor driven by the EWSR1-FLI1 fusion gene resulting from t(11;22), managed with multimodality neoadjuvant chemotherapy, local control (surgery/radiation), and adjuvant chemotherapy.",
-                    "C) It shares the sunburst reaction pathognomonic of osteosarcoma.",
-                    "D) It arises from multinucleated giant cells and exhibits a soap-bubble radiographic pattern."
+                    "A) Drug X is Non-competitive; Drug Y is Uncompetitive.",
+                    "B) Drug X is Competitive inhibition; Drug Y is Non-competitive inhibition.",
+                    "C) Drug X is Uncompetitive; Drug Y is Competitive.",
+                    "D) Both represent mixed allosteric inhibition."
                 ],
                 correct: 1,
-                explanation: "<strong>Patho/Radio Correlation:</strong> Ewing sarcoma is a malignant small round blue cell tumor characterized by the t(11;22) translocation forming the EWSR1-FLI1 fusion gene. It favors the diaphysis of long bones, shows an 'onion-skin' periosteal reaction, and is highly chemosensitive."
+                explanation: "<strong>Enzyme Kinetics:</strong> Competitive inhibitors (Drug X) bind the active site, overcoming high substrate concentration ($K_m$ increases, $V_{max}$ unchanged). Non-competitive inhibitors (Drug Y) bind allosteric sites, lowering functional enzyme capacity ($V_{max}$ decreases, $K_m$ unchanged)."
             },
             {
-                title: "Clinical Case 5",
-                vignette: "A 19-year-old male presents with deep, boring pain in his right thigh that is markedly worse at night and dramatically relieved by small doses of aspirin/NSAIDs. Plain radiograph and CT scan reveal a small, lucent central nidus (<1.5 cm) surrounded by a massive zone of reactive cortical bone sclerosis. What is the biochemical mediator and preferred treatment?",
+                title: "Pharma Case 6",
+                vignette: "A 55-year-old male treated for deep vein thrombosis develops painful, dark necrotic skin lesions on his abdomen and thighs 4 days after initiation of therapy. Lab tests show a rapid depletion of Protein C and Protein S alongside a transient hypercoagulable state. Which drug was started without adequate overlap, and what is its mechanism?",
                 options: [
-                    "A) High local concentrations of prostaglandins produced within the nidus; treated via CT-guided percutaneous radiofrequency ablation (RFA).",
-                    "B) Elevated local cortisol levels; managed by local steroid injections under fluoroscopy.",
-                    "C) Active bacterial proliferation inside the nidus; managed with long-term targeted intravenous antibiotics.",
-                    "D) Excessive osteoclast-mediated bone resorption; treated with high-dose bisphosphonates."
-                ],
-                correct: 0,
-                explanation: "<strong>Patho/Management Correlation:</strong> The nidus of an osteoid osteoma produces high levels of prostaglandins (specifically PGE2), which drive the severe night pain and prompt response to NSAIDs. CT-guided radiofrequency ablation (RFA) is the modern minimally invasive treatment of choice."
-            },
-            {
-                title: "Clinical Case 6",
-                vignette: "A 20-year-old male notices a hard, painless bony lump near his right knee joint, which grew slowly during childhood and stopped growing after skeletal maturity. X-ray shows a bone projection on the surface of the distal femur pointing away from the joint, with the host bone's medullary cavity continuous with the lesion's marrow space. What is the structural pathology and major complication to monitor?",
-                options: [
-                    "A) Malignant primary bone tumor; transformation into osteosarcoma within 5 years.",
-                    "B) Benign cartilage-capped bony projection (exostosis); risk of malignant transformation into chondrosarcoma if the cartilage cap thickness exceeds 1.5–2.0 cm in adulthood.",
-                    "C) Intra-articular synovial chondromatosis; risk of joint locking and secondary osteoarthritis.",
-                    "D) Post-traumatic myositis ossificans; risk of permanent joint ankylosis."
+                    "A) Unfractionated Heparin; binds antithrombin III to inhibit Factor Xa.",
+                    "B) Warfarin; inhibits vitamin K epoxide reductase (VKORC1), causing rapid loss of short half-life endogenous anticoagulants (Proteins C & S) before factors II, IX, and X clear.",
+                    "C) Direct Oral Anticoagulant (Rivaroxaban); direct factor Xa inhibitor.",
+                    "D) Low Molecular Weight Heparin; suppresses platelet aggregation."
                 ],
                 correct: 1,
-                explanation: "<strong>Patho/Radio Correlation:</strong> Osteochondroma features cortical and medullary continuity with the parent bone. The key malignant complication is transformation into secondary chondrosarcoma, suspected clinically if growth resumes after skeletal maturity or if the cartilage cap exceeds 1.5–2 cm on MRI."
+                explanation: "<strong>Adverse Effect & Mechanism:</strong> Warfarin inhibits Vitamin K recycling. Because Proteins C and S have shorter half-lives than clotting factors II, IX, and X, they drop first, precipitating transient hypercoagulability and warfarin-induced skin necrosis if heparin overlap is omitted."
             }
         ];
 
@@ -439,11 +439,11 @@
             finalScore.innerText = score;
 
             if (score >= 5) {
-                performanceNote.innerText = "Masterclass! Your pathoradiological correlations are NEET PG top-ranker level.";
+                performanceNote.innerText = "Brilliant pharmacology grasp! You're cracking clinical correlations easily.";
             } else if (score >= 3) {
-                performanceNote.innerText = "Solid understanding! Review spine pathology and bone tumor translocations.";
+                performanceNote.innerText = "Good job! Review enzyme kinetics and drug-induced adverse effects.";
             } else {
-                performanceNote.innerText = "Keep refining your concepts on infection timelines and radiographic signs.";
+                performanceNote.innerText = "Keep revising toxidromes, receptor blockers, and anticoagulant mechanisms.";
             }
         }
 
