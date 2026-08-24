@@ -41,7 +41,7 @@
             border: 8px solid #2C3E35;
         }
 
-        /* HEADER with Native Animated Running ECG Background */
+        /* HEADER with Isolated Single-Beat Sweeping ECG Animation */
         header {
             position: relative;
             background: linear-gradient(135deg, #1b2821, #2C3E35, #769382);
@@ -61,17 +61,32 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            opacity: 0.65;
             pointer-events: none;
         }
 
-        .ecg-group {
-            animation: scroll-ecg 3s linear infinite;
+        /* Single Beat Left-to-Right Sweep with Fade In/Out */
+        .single-beat {
+            animation: ecg-sweep 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
 
-        @keyframes scroll-ecg {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-500px); }
+        @keyframes ecg-sweep {
+            0% {
+                transform: translateX(-160px);
+                opacity: 0;
+            }
+            25% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1; /* Peak brightness directly behind MEDSYNX */
+            }
+            75% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateX(390px);
+                opacity: 0;
+            }
         }
 
         header h1 {
@@ -219,12 +234,19 @@
 <body>
 
     <div class="phone-frame">
-        <!-- HEADER with Native Animated Running ECG Background -->
+        <!-- HEADER with Individual Sweeping Heartbeat ECG Animation -->
         <header>
             <div class="ecg-bg">
-                <svg viewBox="0 0 1000 100" preserveAspectRatio="none" width="100%" height="100%">
-                    <g class="ecg-group">
-                        <path d="M0,50 L70,50 L85,15 L100,85 L115,35 L130,50 L250,50 L320,50 L335,15 L350,85 L365,35 L380,50 L500,50 L570,50 L585,15 L600,85 L615,35 L630,50 L750,50 L820,50 L835,15 L850,85 L865,35 L880,50 L1000,50" fill="none" stroke="#00ffff" stroke-width="3.5" stroke-linecap="round" filter="drop-shadow(0 0 4px #00ffff)"/>
+                <svg viewBox="0 0 400 100" preserveAspectRatio="none" width="100%" height="100%">
+                    <g class="single-beat">
+                        <!-- Precise Single Heartbeat Path: Baseline -> P Wave -> QRS Complex -> T Wave -> Baseline -->
+                        <path d="M0,50 L45,50 Q52,44 58,42 T66,50 L72,55 L80,10 L90,92 L98,50 L108,50 Q118,34 132,34 T148,50 L200,50" 
+                              fill="none" 
+                              stroke="#00ffff" 
+                              stroke-width="3.5" 
+                              stroke-linecap="round" 
+                              stroke-linejoin="round"
+                              filter="drop-shadow(0 0 5px #00ffff)"/>
                     </g>
                 </svg>
             </div>
