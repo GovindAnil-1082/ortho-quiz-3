@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDSYNX | Dr. Govind</title>
+    <title>MEDSYNX ECG Masterclass</title>
     <style>
         /* Color Palette & Custom Variables */
         :root {
@@ -12,6 +12,8 @@
             --soft-gray: #C0C3B9;
             --accent-tan: #D5CBB9;
             --text-dark: #2C3E35;
+            --correct-green: #4CAF50;
+            --wrong-red: #E53935;
         }
 
         body {
@@ -25,7 +27,7 @@
             min-height: 100vh;
         }
 
-        /* Mobile Viewport Frame */
+        /* Mobile Card Container UI */
         .phone-frame {
             width: 100%;
             max-width: 390px;
@@ -33,7 +35,7 @@
             max-height: 844px;
             background-color: var(--bg-off-white);
             border-radius: 40px;
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -41,265 +43,469 @@
             border: 8px solid #2C3E35;
         }
 
-        /* HEADER with Isolated Single-Beat Sweeping ECG Animation */
-        header {
-            position: relative;
-            background: linear-gradient(135deg, #1b2821, #2C3E35, #769382);
-            padding: 24px 15px;
+        /* Top Header with Crisp 3D G Logo */
+        .app-header {
+            padding: 16px 20px 8px 20px;
             text-align: center;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
+            background-color: var(--bg-off-white);
+            border-bottom: 1px solid var(--accent-tan);
         }
 
-        /* ECG Animation Container */
-        .ecg-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
+        .logo-container {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 4px auto;
         }
 
-        /* Single Beat Left-to-Right Sweep with Fade In/Out */
-        .single-beat {
-            animation: ecg-sweep 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
-        @keyframes ecg-sweep {
-            0% {
-                transform: translateX(-160px);
-                opacity: 0;
-            }
-            25% {
-                opacity: 0.8;
-            }
-            50% {
-                opacity: 1; /* Peak brightness directly behind MEDSYNX */
-            }
-            75% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateX(390px);
-                opacity: 0;
-            }
-        }
-
-        header h1 {
-            position: relative;
-            z-index: 2;
-            font-size: 30px;
-            font-weight: 800;
-            color: var(--bg-off-white);
-            margin: 0;
-            letter-spacing: 1.5px;
-            /* White outline & distinct bottom shadow effect */
-            -webkit-text-stroke: 1px #FFFFFF;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-        }
-
-        /* NAV BOX */
-        nav {
-            background-color: var(--accent-tan);
-            margin: 12px 16px 6px 16px;
-            padding: 8px 12px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        nav span {
-            font-size: 11px; /* 5 points smaller than standard body text */
+        .app-title {
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-dark);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            margin: 0;
+            letter-spacing: -0.5px;
         }
 
-        /* MAIN CONTENT CONTAINER */
-        .main-content {
+        /* Sticky Question Bar */
+        .question-bar {
+            background-color: var(--accent-tan);
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--soft-gray);
+        }
+
+        .question-heading {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .timer-badge {
+            background-color: var(--wrong-red);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        /* Scrollable Content Area */
+        .content-area {
             flex: 1;
             overflow-y: auto;
-            padding: 12px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* SECTION STYLING (Smooth rounded rectangles) */
-        section {
-            position: relative;
-            background-color: white;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 2px solid var(--accent-tan);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-            transition: transform 0.2s ease;
-        }
-
-        section:active {
-            transform: scale(0.98);
-        }
-
-        /* Low opacity background image overlays */
-        .bg-ecg {
-            background: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), 
-                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-        }
-
-        .bg-lungs {
-            background: linear-gradient(rgba(255,255,255,0.88), rgba(255,255,255,0.88)), 
-                        url('https://images.unsplash.com/photo-1584017911766-d451b3d0e843?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-        }
-
-        .article-box {
             padding: 16px;
         }
 
-        .section-tag {
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--primary-green);
-            text-transform: uppercase;
-            margin-bottom: 4px;
-            letter-spacing: 0.5px;
-        }
-
-        .title-box {
-            font-size: 15px;
-            font-weight: 700;
+        .vignette-text {
+            font-size: 12.5px;
+            font-weight: 500;
+            line-height: 1.45;
             color: var(--text-dark);
-            margin: 0 0 6px 0;
+            margin-bottom: 14px;
         }
 
-        .p-box {
+        /* Options List */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 10px 12px;
+            background-color: white;
+            border: 2px solid var(--soft-gray);
+            border-radius: 10px;
+            font-family: inherit;
             font-size: 12px;
-            color: #555555;
-            line-height: 1.4;
-            margin: 0;
-        }
-
-        /* ASIDE BOX (Interactive Pharma Quiz Link) */
-        aside {
-            background: linear-gradient(rgba(118, 147, 130, 0.92), rgba(118, 147, 130, 0.92)), 
-                        url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;
-            border-radius: 18px;
-            padding: 20px 16px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            border: 2px solid var(--accent-tan);
-            transition: all 0.2s ease;
-        }
-
-        aside:hover {
-            opacity: 0.95;
-            transform: translateY(-2px);
-        }
-
-        aside h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin: 0 0 6px 0;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        aside p {
-            font-size: 12px;
-            margin: 0;
-            opacity: 0.9;
-        }
-
-        /* FOOTER */
-        footer {
-            background-color: var(--accent-tan);
-            padding: 12px;
-            text-align: center;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            font-size: 11px;
-            color: var(--text-dark);
             font-weight: 600;
+            color: var(--text-dark);
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary-green);
+        }
+
+        /* Feedback States */
+        .option-btn.correct {
+            background-color: var(--correct-green) !important;
+            color: white !important;
+            border-color: #388E3C !important;
+        }
+
+        .option-btn.wrong {
+            background-color: var(--wrong-red) !important;
+            color: white !important;
+            border-color: #C62828 !important;
+        }
+
+        .option-btn.disabled {
+            pointer-events: none;
+            opacity: 0.85;
+        }
+
+        /* Explanation Box */
+        .explanation-card {
+            display: none;
+            margin-top: 12px;
+            background-color: white;
+            border-left: 4px solid var(--primary-green);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            color: var(--text-dark);
+            line-height: 1.35;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .explanation-card.show {
+            display: block;
+        }
+
+        /* Footer Controls */
+        .footer-controls {
+            padding: 12px 18px;
+            background-color: var(--bg-off-white);
+            border-top: 1px solid var(--accent-tan);
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .action-btn {
+            display: none;
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .action-btn.show {
+            display: block;
+        }
+
+        /* Results Screen */
+        .results-card {
+            display: none;
+            text-align: center;
+            padding: 30px 15px;
+        }
+        .results-card.show {
+            display: block;
         }
     </style>
 </head>
 <body>
 
     <div class="phone-frame">
-        <!-- HEADER with Individual Sweeping Heartbeat ECG Animation -->
-        <header>
-            <div class="ecg-bg">
-                <svg viewBox="0 0 400 100" preserveAspectRatio="none" width="100%" height="100%">
-                    <g class="single-beat">
-                        <!-- Precise Single Heartbeat Path: Baseline -> P Wave -> QRS Complex -> T Wave -> Baseline -->
-                        <path d="M0,50 L45,50 Q52,44 58,42 T66,50 L72,55 L80,10 L90,92 L98,50 L108,50 Q118,34 132,34 T148,50 L200,50" 
-                              fill="none" 
-                              stroke="#00ffff" 
-                              stroke-width="3.5" 
-                              stroke-linecap="round" 
-                              stroke-linejoin="round"
-                              filter="drop-shadow(0 0 5px #00ffff)"/>
-                    </g>
+        <!-- Header with Sharp Vector 3D G Logo -->
+        <div class="app-header">
+            <div class="logo-container">
+                <svg viewBox="0 0 100 100" width="100%" height="100%" shape-rendering="geometricPrecision">
+                    <rect x="15" y="15" width="22" height="22" fill="#4A5568" stroke="#2C3E35" stroke-width="4"/>
+                    <path d="M35 30 L80 30 L80 80 L35 80 L35 55 L60 55 L60 65 L70 65 L70 45 L35 45 Z" fill="#4A5568" stroke="#2C3E35" stroke-width="4"/>
+                    <polygon points="80,30 92,18 92,68 80,80" fill="#1A365D"/>
+                    <polygon points="35,80 47,92 92,92 80,80" fill="#1A365D"/>
                 </svg>
             </div>
-            <h1>MEDSYNX</h1>
-        </header>
-
-        <!-- NAV BOX -->
-        <nav>
-            <span>Dr. GOVIND, MBBS</span>
-        </nav>
-
-        <!-- MAIN CONTENT CONTAINER -->
-        <div class="main-content">
-            
-            <!-- SECTION 1: ECG -->
-            <section class="bg-ecg">
-                <div class="article-box">
-                    <div class="section-tag">Section 01</div>
-                    <h2 class="title-box">Basics of ECG</h2>
-                    <p class="p-box">Master electrical axes, interval calculations, and high-yield arrhythmia recognition for clinical practice and exams.</p>
-                </div>
-            </section>
-
-            <!-- SECTION 2: CHEST EXAMINATION -->
-            <section class="bg-lungs">
-                <div class="article-box">
-                    <div class="section-tag">Section 02</div>
-                    <h2 class="title-box">Basics of Chest Examination</h2>
-                    <p class="p-box">Systematic approach to inspection, palpation, percussion, and auscultation findings in respiratory pathology.</p>
-                </div>
-            </section>
-
-            <!-- ASIDE: PHARMA QUIZ LINK -->
-            <aside onclick="openPharmaQuiz()">
-                <h3>Try this quiz on Pharmacology for NEET PG</h3>
-                <p>Tap here to launch high-yield clinical vignettes & timer challenge →</p>
-            </aside>
-
+            <h1 class="app-title">MEDSYNX ECG</h1>
         </div>
 
-        <!-- FOOTER -->
-        <footer>
-            © Copyright 2026 GitHub.io
-        </footer>
+        <!-- Sticky Question Bar -->
+        <div class="question-bar">
+            <h2 id="q-title" class="question-heading">ECG Case 1</h2>
+            <div class="timer-badge"><span id="timer">60</span>s</div>
+        </div>
+
+        <!-- Scrollable Content Area -->
+        <div class="content-area">
+            <div id="quiz-body">
+                <p id="q-vignette" class="vignette-text"></p>
+                
+                <div id="options-box" class="options-container">
+                    <!-- Options Inserted Dynamically -->
+                </div>
+
+                <div id="explanation" class="explanation-card">
+                    <!-- Explanation Inserted Dynamically -->
+                </div>
+            </div>
+
+            <div id="results-screen" class="results-card">
+                <h2>Quiz Complete! 🎉</h2>
+                <p>You scored <span id="final-score">0</span> / 10</p>
+                <p id="performance-note" style="font-weight: 600; margin-top: 15px;"></p>
+                <button class="action-btn show" style="margin: 20px auto 0 auto;" onclick="restartQuiz()">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Footer Button -->
+        <div class="footer-controls">
+            <button id="next-btn" class="action-btn" onclick="nextQuestion()">Next Question</button>
+        </div>
     </div>
 
     <script>
-        function openPharmaQuiz() {
-            if ("vibrate" in navigator) {
-                navigator.vibrate(50);
+        const questions = [
+            {
+                title: "ECG Case 1",
+                vignette: "A 68-year-old female with a history of rheumatic heart disease presents with sudden onset palpitations. Clinical examination reveals an irregularly irregular pulse and absent 'a' waves on the JVP. Her ECG demonstrates a narrow QRS complex rhythm with no discernible P waves and a wavy, chaotic baseline. What is the diagnosis?",
+                options: [
+                    "A) Atrial Flutter",
+                    "B) Atrial Fibrillation (AFib)",
+                    "C) Multifocal Atrial Tachycardia (MAT)",
+                    "D) Ventricular Fibrillation"
+                ],
+                correct: 1,
+                explanation: "<strong>Correct: AFib.</strong> The hallmark of Atrial Fibrillation is an irregularly irregular rhythm with a chaotic baseline (absent P waves). The absent 'a' waves on JVP clinically confirm the loss of coordinated atrial kick."
+            },
+            {
+                title: "ECG Case 2",
+                vignette: "A 55-year-old male with COPD presents to the ER complaining of shortness of breath. The ECG shows a regular narrow-complex tachycardia with a ventricular rate of exactly 150 bpm. A distinct 'sawtooth' pattern is visible in the inferior leads (II, III, aVF) at a rate of 300 bpm. What is the rhythm?",
+                options: [
+                    "A) Atrial Fibrillation",
+                    "B) PSVT",
+                    "C) Atrial Flutter (AFlu)",
+                    "D) Sinus Tachycardia"
+                ],
+                correct: 2,
+                explanation: "<strong>Correct: Atrial Flutter.</strong> Characterized by the classic 'sawtooth' flutter waves (F waves) produced by a macroreentrant circuit in the right atrium, typically firing at 300 bpm with a 2:1 AV conduction resulting in a 150 bpm ventricular rate."
+            },
+            {
+                title: "ECG Case 3",
+                vignette: "A 62-year-old male, 3 days post-anterior wall MI, suddenly complains of dizziness. His BP drops to 90/60 mmHg. The monitor displays a wide-complex tachycardia at 160 bpm. Every QRS complex looks identical in shape and amplitude. What is the diagnosis?",
+                options: [
+                    "A) Polymorphic Ventricular Tachycardia",
+                    "B) SVT with Aberrant Conduction",
+                    "C) Monomorphic Ventricular Tachycardia (Mono VT)",
+                    "D) Ventricular Fibrillation"
+                ],
+                correct: 2,
+                explanation: "<strong>Correct: Monomorphic VT.</strong> A rapid, wide QRS complex rhythm originating from a single ventricular ectopic focus (often a scar from prior MI). Every beat matches the previous one morphologically."
+            },
+            {
+                title: "ECG Case 4",
+                vignette: "A patient suffering from acute myocardial ischemia collapses in the ward. The ECG reveals a rapid, chaotic, wide-complex tachycardia where the QRS complexes continuously change in morphology, amplitude, and axis from beat to beat. The baseline QT interval prior to the event was normal. What is this rhythm?",
+                options: [
+                    "A) Polymorphic Ventricular Tachycardia (Poly VT)",
+                    "B) Torsades de Pointes",
+                    "C) Monomorphic Ventricular Tachycardia",
+                    "D) Atrial Fibrillation with WPW syndrome"
+                ],
+                correct: 0,
+                explanation: "<strong>Correct: Polymorphic VT.</strong> The QRS changes shape and axis continuously. Because the underlying QT interval was normal (often driven by acute ischemia rather than repolarization abnormalities), it is classified as Poly VT, not Torsades."
+            },
+            {
+                title: "ECG Case 5",
+                vignette: "A 24-year-old female taking erythromycin and fluconazole experiences a syncopal episode. Her baseline ECG showed a markedly prolonged QTc interval (540 ms). The rhythm strip during syncope demonstrates a wide-complex tachycardia that appears to continuously twist around the isoelectric baseline. What is the diagnosis?",
+                options: [
+                    "A) Monomorphic Ventricular Tachycardia",
+                    "B) Atrial Flutter",
+                    "C) Polymorphic Ventricular Tachycardia (non-TdP)",
+                    "D) Torsades de Pointes (TdP)"
+                ],
+                correct: 3,
+                explanation: "<strong>Correct: Torsades de Pointes.</strong> A specific subtype of polymorphic VT that occurs in the setting of a prolonged QT interval (often drug-induced). The hallmark is the 'twisting of the points' around the baseline. IV Magnesium Sulfate is the treatment of choice."
+            },
+            {
+                title: "ECG Case 6",
+                vignette: "A 22-year-old otherwise healthy male presents with the sudden onset of a 'racing heart'. He is hemodynamically stable. ECG shows a perfectly regular, narrow-complex tachycardia at 180 bpm. P waves are not clearly visible, appearing to be buried within the QRS complexes. Vagal maneuvers transiently slow the heart but fail to break the rhythm. What is the rhythm?",
+                options: [
+                    "A) Sinus Tachycardia",
+                    "B) Paroxysmal Supraventricular Tachycardia (PSVT)",
+                    "C) Atrial Fibrillation",
+                    "D) Multifocal Atrial Tachycardia"
+                ],
+                correct: 1,
+                explanation: "<strong>Correct: PSVT.</strong> Typically driven by AV nodal reentrant tachycardia (AVNRT). Characterized by sudden onset/offset, regular narrow QRS, and retrograde P waves that are often hidden in the QRS. Adenosine is the drug of choice."
+            },
+            {
+                title: "ECG Case 7",
+                vignette: "During a routine preoperative clearance for a hernia repair, a 45-year-old asymptomatic patient has an ECG. The rhythm is regular at 72 bpm. The PR interval is remarkably prolonged at 260 ms (normal < 200 ms), but it remains constant, and every single P wave is followed by a QRS complex. What is this finding?",
+                options: [
+                    "A) First-degree AV Block (1° AVB)",
+                    "B) Mobitz Type I Block",
+                    "C) Mobitz Type II Block",
+                    "D) Third-degree AV Block"
+                ],
+                correct: 0,
+                explanation: "<strong>Correct: 1° AVB.</strong> Defined strictly by a prolonged PR interval (>200 ms or >1 large square). Because there are no dropped beats and every P wave conducts to the ventricles, it is a first-degree block requiring no specific treatment."
+            },
+            {
+                title: "ECG Case 8",
+                vignette: "A patient presents with occasional lightheadedness. The ECG rhythm strip shows a repeating pattern: the PR interval progressively lengthens with each successive beat until eventually, a P wave appears but is not followed by a QRS complex (a dropped beat). Following the dropped beat, the sequence restarts with a shorter PR interval. What is the diagnosis?",
+                options: [
+                    "A) First-degree AV Block",
+                    "B) Second-degree AV Block - Mobitz I (Wenckebach)",
+                    "C) Second-degree AV Block - Mobitz II",
+                    "D) Complete Heart Block"
+                ],
+                correct: 1,
+                explanation: "<strong>Correct: Mobitz I (Wenckebach).</strong> The hallmark is progressive prolongation of the PR interval culminating in a non-conducted P wave. The defect is usually at the level of the AV node and is often benign."
+            },
+            {
+                title: "ECG Case 9",
+                vignette: "An elderly patient with extensive structural heart disease presents with syncope. The ECG reveals a regular sinus rhythm, but intermittently, P waves are entirely blocked and fail to produce a QRS complex. The PR interval for all conducted beats remains perfectly constant, with no progressive lengthening prior to the dropped beat. What is the diagnosis?",
+                options: [
+                    "A) Second-degree AV Block - Mobitz I",
+                    "B) Second-degree AV Block - Mobitz II",
+                    "C) Third-degree AV Block",
+                    "D) First-degree AV Block"
+                ],
+                correct: 1,
+                explanation: "<strong>Correct: Mobitz II.</strong> Characterized by unexpected non-conducted P waves WITHOUT prior PR prolongation. The block is usually in the His-Purkinje system, carries a high risk of progressing to complete heart block, and requires a pacemaker."
+            },
+            {
+                title: "ECG Case 10",
+                vignette: "A 75-year-old man presents with extreme fatigue and a heart rate of 35 bpm. On examination, intermittent bounding 'Cannon A waves' are seen in the JVP. The ECG shows P waves marching regularly at 80 bpm, and wide QRS complexes marching regularly at 35 bpm. There is absolutely no relationship between the P waves and the QRS complexes. What is the rhythm?",
+                options: [
+                    "A) Mobitz I (Wenckebach)",
+                    "B) Mobitz II",
+                    "C) Third-degree (Complete) AV Block",
+                    "D) Ventricular Escape Rhythm without atrial activity"
+                ],
+                correct: 2,
+                explanation: "<strong>Correct: 3° AVB.</strong> Complete AV dissociation. The atria and ventricles beat independently. Cannon A waves occur clinically when the right atrium contracts against a closed tricuspid valve (which happens randomly due to the dissociation)."
             }
-            window.location.href = "https://GovindAnil-1082.github.io/ortho-quiz-2/"; 
+        ];
+
+        let currentIndex = 0;
+        let score = 0;
+        let timer;
+        let timeLeft = 60;
+
+        const qTitle = document.getElementById('q-title');
+        const qVignette = document.getElementById('q-vignette');
+        const optionsBox = document.getElementById('options-box');
+        const explanationBox = document.getElementById('explanation');
+        const nextBtn = document.getElementById('next-btn');
+        const timerSpan = document.getElementById('timer');
+        const quizBody = document.getElementById('quiz-body');
+        const resultsScreen = document.getElementById('results-screen');
+        const finalScore = document.getElementById('final-score');
+        const performanceNote = document.getElementById('performance-note');
+
+        function loadQuestion() {
+            if (currentIndex >= questions.length) {
+                showResults();
+                return;
+            }
+
+            const q = questions[currentIndex];
+            qTitle.innerText = q.title;
+            qVignette.innerText = q.vignette;
+            explanationBox.innerHTML = q.explanation;
+            explanationBox.classList.remove('show');
+            nextBtn.classList.remove('show');
+
+            optionsBox.innerHTML = "";
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => selectAnswer(idx);
+                optionsBox.appendChild(btn);
+            });
+
+            resetTimer();
         }
+
+        function resetTimer() {
+            clearInterval(timer);
+            timeLeft = 60;
+            timerSpan.innerText = timeLeft;
+            timer = setInterval(() => {
+                timeLeft--;
+                timerSpan.innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        function handleTimeout() {
+            if ("vibrate" in navigator) {
+                navigator.vibrate([120, 50, 120]);
+            }
+            const q = questions[currentIndex];
+            const buttons = optionsBox.getElementsByTagName('button');
+            buttons[q.correct].classList.add('correct');
+            for (let btn of buttons) btn.classList.add('disabled');
+            explanationBox.classList.add('show');
+            nextBtn.classList.add('show');
+        }
+
+        function selectAnswer(selectedIndex) {
+            clearInterval(timer);
+            const q = questions[currentIndex];
+            const buttons = optionsBox.getElementsByTagName('button');
+
+            if (selectedIndex === q.correct) {
+                if ("vibrate" in navigator) {
+                    navigator.vibrate(40);
+                }
+                buttons[selectedIndex].classList.add('correct');
+                score++;
+            } else {
+                if ("vibrate" in navigator) {
+                    navigator.vibrate([120, 50, 120]);
+                }
+                buttons[selectedIndex].classList.add('wrong');
+                buttons[q.correct].classList.add('correct');
+            }
+
+            for (let btn of buttons) btn.classList.add('disabled');
+            explanationBox.classList.add('show');
+            nextBtn.classList.add('show');
+
+            if (currentIndex === questions.length - 1) {
+                nextBtn.innerText = "View Results";
+            }
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            loadQuestion();
+        }
+
+        function showResults() {
+            quizBody.style.display = 'none';
+            document.querySelector('.question-bar').style.display = 'none';
+            resultsScreen.classList.add('show');
+            finalScore.innerText = score;
+
+            if (score >= 9) {
+                performanceNote.innerText = "Exceptional! Your arrhythmia diagnosis and management skills are top-tier.";
+            } else if (score >= 6) {
+                performanceNote.innerText = "Solid work! Review the differences between TdP vs Poly VT, and Mobitz I vs II.";
+            } else {
+                performanceNote.innerText = "Keep reviewing your ACLS algorithms and PR interval patterns.";
+            }
+        }
+
+        function restartQuiz() {
+            currentIndex = 0;
+            score = 0;
+            quizBody.style.display = 'block';
+            document.querySelector('.question-bar').style.display = 'flex';
+            resultsScreen.classList.remove('show');
+            nextBtn.innerText = "Next Question";
+            loadQuestion();
+        }
+
+        loadQuestion();
     </script>
 </body>
 </html>
